@@ -3,6 +3,7 @@ import tensorflow as tf
 from helper import readResult
 
 np.random.seed(1337)
+
 EMBED_SIZE = 64
 HIDDEN_SIZE = 32
 MAX_LEN = 512

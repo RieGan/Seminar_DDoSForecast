@@ -1,7 +1,6 @@
 import math
 from sklearn.metrics import average_precision_score
 
-
 def readResult(y_test, results):
     index = 0
     p = n = tp = tn = fp = fn = 0
@@ -44,3 +43,5 @@ def readResult(y_test, results):
     print("fN:", f_n)
     print("acc:", acc)
     print("AUC:",average_precision_score(y_test, results))
+
+

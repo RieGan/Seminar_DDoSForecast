@@ -1,7 +1,7 @@
 # import lib
 from document import *
-from cnn import cnn_zhang, cnn_improved
-from lstm import lstm_zhang
+# from cnn import cnn_zhang, cnn_improved
+from lstm import lstm_zhang, lstm_improved
 import numpy as np
 
 # dataset initialize
@@ -34,6 +34,7 @@ print(X_train[0])
 print(y_train)
 print(X_test[0])
 
-cnn_zhang(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
-cnn_improved(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
+# cnn_zhang(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
+# cnn_improved(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
 lstm_zhang(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
+lstm_improved(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
