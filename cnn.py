@@ -42,7 +42,7 @@ def cnn_zhang(X_train, y_train, X_test, y_test, vocab_size):
 
     model.fit(X_train, y_train, batch_size=BATCH_SIZE,
               epochs=EPOCHS,
-              validation_data=(X_test, y_test))
+              validation_data=(X_test, y_test), verbose=0)
 
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
@@ -103,7 +103,7 @@ def cnn_improved(X_train, y_train, X_test, y_test, vocab_size):
 
     model.fit(X_train, y_train, batch_size=BATCH_SIZE,
               epochs=EPOCHS,
-              validation_data=(X_test, y_test))
+              validation_data=(X_test, y_test),verbose=0)
 
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]

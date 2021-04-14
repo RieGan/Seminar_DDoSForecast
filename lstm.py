@@ -8,7 +8,7 @@ from tensorflow.keras import backend as K
 np.random.seed(1337)
 
 EMBED_SIZE = 64
-HIDDEN_SIZE = 32
+HIDDEN_SIZE = 64
 BATCH_SIZE = 10
 EPOCHS = 12
 
@@ -36,7 +36,7 @@ def lstm_zhang(X_train, y_train, X_test, y_test, vocab_size):
                   optimizer='rmsprop')
     model.fit(X_train, y_train, batch_size=BATCH_SIZE,
               epochs=EPOCHS,
-              validation_data=(X_test, y_test))
+              validation_data=(X_test, y_test), verbose=0)
 
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
@@ -69,7 +69,7 @@ def lstm_improved(X_train, y_train, X_test, y_test, vocab_size):
     #               optimizer='rmsprop')
     model.fit(X_train, y_train, batch_size=BATCH_SIZE,
               epochs=EPOCHS,
-              validation_data=(X_test, y_test))
+              validation_data=(X_test, y_test), verbose=0)
 
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
