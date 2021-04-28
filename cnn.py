@@ -13,6 +13,7 @@ EPOCHS = 12
 nb_filter = 10
 filter_length = 5
 
+
 def cnn_zhang(X_train, y_train, X_test, y_test, vocab_size):
     X_train = tf.keras.preprocessing.sequence.pad_sequences(X_train, maxlen=128)
     X_test = tf.keras.preprocessing.sequence.pad_sequences(X_test, maxlen=128)
@@ -47,7 +48,7 @@ def cnn_zhang(X_train, y_train, X_test, y_test, vocab_size):
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
 
-    return readResult(y_test, results)
+    return readResult(y_test, results, name="CNN", form="JSON")
 
 
 def cnn_improved(X_train, y_train, X_test, y_test, vocab_size):
@@ -103,9 +104,9 @@ def cnn_improved(X_train, y_train, X_test, y_test, vocab_size):
 
     model.fit(X_train, y_train, batch_size=BATCH_SIZE,
               epochs=EPOCHS,
-              validation_data=(X_test, y_test),verbose=0)
+              validation_data=(X_test, y_test), verbose=0)
 
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
 
-    return readResult(y_test, results)
+    return readResult(y_test, results, name="CNN+", form="JSON")

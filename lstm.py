@@ -10,7 +10,7 @@ np.random.seed(1337)
 EMBED_SIZE = 64
 HIDDEN_SIZE = 64
 BATCH_SIZE = 10
-EPOCHS = 12
+EPOCHS = 8
 
 
 def lstm_zhang(X_train, y_train, X_test, y_test, vocab_size):
@@ -41,7 +41,7 @@ def lstm_zhang(X_train, y_train, X_test, y_test, vocab_size):
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
 
-    return readResult(y_test, results)
+    return readResult(y_test, results, name="LSTM", form="JSON")
 
 def root_mean_squared_error(y_true, y_pred):
     return K.sqrt(mean_squared_error(y_true, y_pred))
@@ -74,7 +74,7 @@ def lstm_improved(X_train, y_train, X_test, y_test, vocab_size):
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
 
-    return readResult(y_test, results)
+    return readResult(y_test, results, name="LSTM+", form="JSON")
 
 
 

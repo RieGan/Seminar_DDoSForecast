@@ -2,7 +2,7 @@
 from document import *
 from cnn import cnn_zhang, cnn_improved
 from lstm import lstm_zhang, lstm_improved
-from svm import svm_classify
+from svm_sgd import svm_classify, sgd_classify
 import numpy as np
 
 # dataset initialize
@@ -22,13 +22,15 @@ X_train, y_train = formatK(devlist[0], vocab)
 X_test, y_test = formatK(testlist[0], vocab)
 
 print()
-print("---------SVM---------")
+#print("---------SVM---------")
 svm_classify(devlist[0], testlist[0])
-print("---------CNN---------")
+#print("---------SGD---------")
+sgd_classify(devlist[0], testlist[0])
+#print("---------CNN---------")
 cnn_zhang(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
-print("---------CNN+--------")
+#print("---------CNN+--------")
 cnn_improved(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
-print("---------LSTM--------")
+#print("---------LSTM--------")
 lstm_zhang(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))
-print("--------LSTM+--------")
+#print("--------LSTM+--------")
 lstm_improved(np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test), len(vocab))

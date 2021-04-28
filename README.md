@@ -4,4 +4,4 @@ This repository is a collection of code that I use for the "seminar" course in t
 
 ## Configuration/Setup
 #### Virtual Environment : Conda
-How to create virtual environment: `conda create --name <env name> --file environment.yml`
+How to create virtual environment: `conda env create --name <env name> --file environment.yml`

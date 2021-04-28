@@ -1,9 +1,14 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import SGDClassifier
 from helper import readResult
 import numpy as np
 
 np.random.seed(1337)
+TOLERANCE = 1e-5
+
 
 def word_transform(documents_train, documents_test):
     words_train = []
@@ -27,24 +32,21 @@ def word_transform(documents_train, documents_test):
     # tfidf_transformer = TfidfTransformer()
     # words_tfidf = tfidf_transformer.fit_transform(words_counts)
 
-
     tfidf_vectorizer = TfidfVectorizer()
     train_words_tfidf = tfidf_vectorizer.fit_transform(words_train)
     test_words_tfidf = tfidf_vectorizer.transform(words_test)
 
     print("train_tfidf_shape:", train_words_tfidf.shape)
     print("test_tfidf_shape", test_words_tfidf.shape)
-    #print("targets_len:", len(targets_train))
+    # print("targets_len:", len(targets_train))
 
     return {'tfidf': train_words_tfidf, 'target': targets_train}, {'tfidf': test_words_tfidf, 'target': targets_test}
 
 
-
 def svm_classify(trains, tests):
-
     trains, tests = word_transform(trains, tests)
 
-    model = LinearSVC()
+    model = make_pipeline(StandardScaler(with_mean=False), LinearSVC(tol=TOLERANCE))
     model.fit(trains['tfidf'], trains['target'])
 
     predicted = model.predict(tests['tfidf'])
@@ -52,4 +54,15 @@ def svm_classify(trains, tests):
     # print("predicted: ", predicted)
     # print("target   : ", tests['target'])
 
-    return readResult(tests['target'], predicted)
+    return readResult(tests['target'], predicted, name="SVM", form="JSON")
+
+
+def sgd_classify(trains, tests):
+    trains, tests = word_transform(trains, tests)
+
+    model = make_pipeline(StandardScaler(with_mean=False), SGDClassifier(max_iter=1000, tol=TOLERANCE))
+    model.fit(trains['tfidf'], trains['target'])
+
+    predicted = model.predict(tests['tfidf'])
+
+    return readResult(tests['target'], predicted, name="SGD", form="JSON")
