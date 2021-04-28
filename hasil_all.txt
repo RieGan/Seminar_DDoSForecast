@@ -1,0 +1,73 @@
+17760
+3048
+234
+length of pos and neg tweets: 3048 17760
+range: 0, pos: 67, neg: 435, dev: 390, test: 196
+range: 1, pos: 67, neg: 435, dev: 390, test: 196
+range: 2, pos: 67, neg: 435, dev: 390, test: 196
+range: 3, pos: 67, neg: 435, dev: 390, test: 196
+range: 4, pos: 67, neg: 435, dev: 390, test: 196
+range: 5, pos: 67, neg: 435, dev: 390, test: 196
+Weeks:  6
+Vocab:  1501
+
+train_tfidf_shape: (390, 1073)
+test_tfidf_shape (196, 1073)
+TruePositive: 7
+TrueNegative: 160
+falsePositive: 9
+falseNegative: 20
+{"Name": "SVM", "G-mean": 0.4954316836304081, "PrecisionPositive": 0.4375, "PrecisionNegative": 0.8888888888888888, "RecallPositive": 0.25925925925925924, "RecallNegative": 0.9467455621301775, "F1-ScorePositive": 0.3255813953488372, "F1-ScoreNegative": 0.9169054441260744, "Accuracy": 0.8520408163265306, "AUC": 0.21546674225245652}
+train_tfidf_shape: (390, 1073)
+test_tfidf_shape (196, 1073)
+TruePositive: 9
+TrueNegative: 138
+falsePositive: 31
+falseNegative: 18
+{"Name": "SGD", "G-mean": 0.5217176910096359, "PrecisionPositive": 0.225, "PrecisionNegative": 0.8846153846153846, "RecallPositive": 0.3333333333333333, "RecallNegative": 0.8165680473372781, "F1-ScorePositive": 0.26865671641791045, "F1-ScoreNegative": 0.8492307692307692, "Accuracy": 0.75, "AUC": 0.16683673469387755}
+X_train shape: (390, 128)
+X_test shape: (196, 128)
+Build model...
+TruePositive: 5
+TrueNegative: 156
+falsePositive: 13
+falseNegative: 22
+{"Name": "CNN", "G-mean": 0.4134491152973615, "PrecisionPositive": 0.2777777777777778, "PrecisionNegative": 0.8764044943820225, "RecallPositive": 0.18518518518518517, "RecallNegative": 0.9230769230769231, "F1-ScorePositive": 0.22222222222222224, "F1-ScoreNegative": 0.899135446685879, "Accuracy": 0.8214285714285714, "AUC": 0.33239233835166826}
+X_train shape: (390, 512)
+X_test shape: (196, 512)
+Build model...
+#1: (None, 512, 64)
+#2: (None, 507, 50)
+#3: (None, 253, 50)
+#4: (None, 249, 50)
+#5: (None, 124, 50)
+#6: (None, 121, 50)
+#7: (None, 60, 50)
+#8: (None, 57, 50)
+#9: (None, 28, 50)
+#10: (None, 25, 50)
+#11: (None, 12, 50)
+#12: (None, 600)
+#13: (None, 32)
+#14: (None, 8)
+TruePositive: 3
+TrueNegative: 167
+falsePositive: 2
+falseNegative: 24
+{"Name": "CNN+", "G-mean": 0.3313550764953868, "PrecisionPositive": 0.6, "PrecisionNegative": 0.8743455497382199, "RecallPositive": 0.1111111111111111, "RecallNegative": 0.9881656804733728, "F1-ScorePositive": 0.18750000000000003, "F1-ScoreNegative": 0.9277777777777777, "Accuracy": 0.8673469387755102, "AUC": 0.3004981589776911}
+X_train shape: (390, 128)
+X_test shape: (196, 128)
+Build model...
+TruePositive: 9
+TrueNegative: 138
+falsePositive: 31
+falseNegative: 18
+{"Name": "LSTM", "G-mean": 0.5217176910096359, "PrecisionPositive": 0.225, "PrecisionNegative": 0.8846153846153846, "RecallPositive": 0.3333333333333333, "RecallNegative": 0.8165680473372781, "F1-ScorePositive": 0.26865671641791045, "F1-ScoreNegative": 0.8492307692307692, "Accuracy": 0.75, "AUC": 0.3102961483678377}
+X_train shape: (390, 128)
+X_test shape: (196, 128)
+Build model...
+TruePositive: 0
+TrueNegative: 169
+falsePositive: 0
+falseNegative: 27
+{"Name": "LSTM+", "G-mean": 0.0, "PrecisionPositive": "err:div by zero", "PrecisionNegative": 0.8622448979591837, "RecallPositive": 0.0, "RecallNegative": 1.0, "F1-ScorePositive": "err:div by zero", "F1-ScoreNegative": 0.9260273972602739, "Accuracy": 0.8622448979591837, "AUC": 0.26905403639895165}
