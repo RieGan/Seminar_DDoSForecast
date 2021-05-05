@@ -215,7 +215,7 @@ def initData(week_num, date_range):
     negDates = readRandomDate()
     idList = readIDList()
 
-    trainIDs = idList[:80]
+    trainIDs = idList[:140]
     devIDs = idList[80:140]
     testIDs = idList[140:]
 
@@ -223,7 +223,7 @@ def initData(week_num, date_range):
 
     posTrainList = getPositiveSamples_ranges(pos, events, trainIDs, week_num, date_range)
     devList = getPositiveSamples_ranges(pos, events, devIDs, week_num, date_range)
-    testList = getPositiveSamples_ranges(pos, events, testIDs, week_num, date_range)
+    posTestList = getPositiveSamples_ranges(pos, events, testIDs, week_num, date_range)
 
     negTrainList = [[] for i in range(week_num)]
     for i in range(10, 20):
@@ -234,14 +234,15 @@ def initData(week_num, date_range):
         for j in range(week_num):
             negTrainList[j] += negTrains[j]
             devList[j] += negDev[j]
-            testList[j] += negTests[j]
 
     trainList = [[] for i in range(week_num)]
+    testList = [[] for i in range(week_num)]
     for i in range(week_num):
         print('range: %d, pos: %d, neg: %d, dev: %d, test: %d' % (
         i, len(posTrainList[i]), len(negTrainList[i]), len(devList[i]), len(testList[i])))
         #	trainList[i]=posTrainList[i]+negTrainList[i][:len(posTrainList[i])] # balance
         trainList[i] = posTrainList[i] + negTrainList[i][:len(posTrainList[i])]
+        testList[i] = posTestList[i] + negTests[i][:len(posTestList[i])]
 
     for i in range(week_num):
         for d in trainList[i] + devList[i] + testList[i]:
@@ -277,61 +278,62 @@ def initData_multi():
     negDates = readRandomDate()
     idList = readIDList()
 
-    trainIDs = idList[:80]
-    devIDs = idList[80:140]
+    trainIDs = idList[:140]
+    #devIDs = idList[80:140]
     testIDs = idList[140:]
-
+    print("testID", len(testIDs))
     print('length of pos and neg tweets: %s %s' % (len(pos), len(neg)))
 
-    posTrainList = getPositiveSamples_ranges(pos, events, trainIDs, 4, 7) + getPositiveSamples_ranges(pos, events,
-                                                                                                      trainIDs, 2, 14)
-    devList = getPositiveSamples_ranges(pos, events, devIDs, 4, 7) + getPositiveSamples_ranges(pos, events, devIDs, 2,
-                                                                                               14)
-    testList = getPositiveSamples_ranges(pos, events, testIDs, 4, 7) + getPositiveSamples_ranges(pos, events, testIDs,
-                                                                                                 2, 14)
+    posTrainList = getPositiveSamples_ranges(pos, events, trainIDs, 1, 7) + getPositiveSamples_ranges(pos, events,
+                                                                                                      trainIDs, 1, 14)
+    #devList = getPositiveSamples_ranges(pos, events, devIDs, 4, 7) + getPositiveSamples_ranges(pos, events, devIDs, 2,
+                                                                                               # 14)
+    testList = getPositiveSamples_ranges(pos, events, testIDs, 1, 7) + getPositiveSamples_ranges(pos, events, testIDs,
+                                                                                                 1, 14)
 
+    print("posTrainlen", len(posTrainList))
     posTrainList = getSameDocumetnsList(posTrainList)
-    devList = getSameDocumetnsList(devList)
+    #devList = getSameDocumetnsList(devList)
     testList = getSameDocumetnsList(testList)
 
-    week_num = 6
+    week_num = 2
     negTrainList = [[] for i in range(week_num)]
     for i in range(10, 20):
-        negTrains = getNegativeSamples_ranges(neg, negDates[i + 10], events, trainIDs, 4,
-                                              7) + getNegativeSamples_ranges(neg, negDates[i + 10], events, trainIDs, 2,
+        negTrains = getNegativeSamples_ranges(neg, negDates[i + 10], events, trainIDs, 1,
+                                              7) + getNegativeSamples_ranges(neg, negDates[i + 10], events, trainIDs, 1,
                                                                              14)
-        negDev = getNegativeSamples_ranges(neg, negDates[i], events, devIDs, 4, 7) + getNegativeSamples_ranges(neg,
-                                                                                                               negDates[
-                                                                                                                   i],
-                                                                                                               events,
-                                                                                                               devIDs,
-                                                                                                               2, 14)
-        negTests = getNegativeSamples_ranges(neg, negDates[i], events, testIDs, 4, 7) + getNegativeSamples_ranges(neg,
+        # negDev = getNegativeSamples_ranges(neg, negDates[i], events, devIDs, 4, 7) + getNegativeSamples_ranges(neg,
+        #                                                                                                        negDates[
+        #                                                                                                            i],
+        #                                                                                                        events,
+        #                                                                                                        devIDs,
+        #                                                                                                        2, 14)
+        negTests = getNegativeSamples_ranges(neg, negDates[i], events, testIDs, 1, 7) + getNegativeSamples_ranges(neg,
                                                                                                                   negDates[
                                                                                                                       i],
                                                                                                                   events,
                                                                                                                   testIDs,
-                                                                                                                  2, 14)
+                                                                                                                  1, 14)
 
         negTrains = getSameDocumetnsList(negTrains)
-        negDev = getSameDocumetnsList(negDev)
+        # negDev = getSameDocumetnsList(negDev)
         negTests = getSameDocumetnsList(negTests)
 
         for j in range(week_num):
             negTrainList[j] += negTrains[j]
-            devList[j] += negDev[j]
+            # devList[j] += negDev[j]
             testList[j] += negTests[j]
 
     trainList = [[] for i in range(week_num)]
     for i in range(week_num):
-        print('range: %d, pos: %d, neg: %d, dev: %d, test: %d' % (
-        i, len(posTrainList[i]), len(negTrainList[i]), len(devList[i]), len(testList[i])))
+        print('range: %d, pos: %d, neg: %d, test: %d' % (
+        i, len(posTrainList[i]), len(negTrainList[i]), len(testList[i])))
         trainList[i] = posTrainList[i] + negTrainList[i][:len(posTrainList[i])]  # balance
 
     for i in range(week_num):
-        for d in trainList[i] + devList[i] + testList[i]:
+        for d in trainList[i] + testList[i]:
             for w in list(d.words):
                 if isEnglishWord(w) == False:
                     del d.words[w]
 
-    return trainList, devList, testList
+    return trainList, testList

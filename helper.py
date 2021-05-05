@@ -4,6 +4,7 @@ from sklearn.metrics import average_precision_score
 
 
 def readResult(y_test, results, form=None, name=None):
+    print("result", results)
     index = 0
     auc = average_precision_score(y_test, results)
     p = n = tp = tn = fp = fn = 0

@@ -45,14 +45,15 @@ def word_transform(documents_train, documents_test):
 
 def svm_classify(trains, tests):
     trains, tests = word_transform(trains, tests)
-
-    model = make_pipeline(StandardScaler(with_mean=False), LinearSVC(tol=TOLERANCE))
+    print("trains[0]:")
+    print(trains['tfidf'])
+    model = make_pipeline(StandardScaler(with_mean=False), LinearSVC(tol=TOLERANCE, max_iter=2000000))
     model.fit(trains['tfidf'], trains['target'])
 
     predicted = model.predict(tests['tfidf'])
 
-    # print("predicted: ", predicted)
-    # print("target   : ", tests['target'])
+    print("predicted: ", predicted)
+    print("target   : ", tests['target'])
 
     return readResult(tests['target'], predicted, name="SVM", form="JSON")
 
