@@ -50,7 +50,8 @@ def cnn_zhang(X_train, y_train, X_test, y_test, vocab_size):
     X_pred = model.predict(X_test)
     results = [result[0] for result in X_pred]
 
-    return readResult(y_test, results, name="CNN", form="JSON")
+    readResult(y_test, results, name="CNN", form="JSON")
+    return model
 
 def root_mean_squared_logarithmic_error(y_true, y_pred):
     return K.sqrt(mean_squared_logarithmic_error(y_true, y_pred))
@@ -124,4 +125,5 @@ def cnn_improved(X_train, y_train, X_test, y_test, vocab_size):
     results = [result[0] for result in X_pred]
 
     readResult(y_train, train_results, name="training_cnn+", form="JSON")
-    return readResult(y_test, results, name="Testing_CNN+", form="JSON")
+    readResult(y_test, results, name="Testing_CNN+", form="JSON")
+    return model

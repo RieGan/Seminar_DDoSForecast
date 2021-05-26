@@ -1,6 +1,9 @@
 import math
 import json
 from sklearn.metrics import average_precision_score
+from tensorflow.keras.models import load_model, save_model
+import pickle
+import json
 
 
 def readResult(y_test, results, form=None, name=None):
@@ -102,3 +105,22 @@ def readResult(y_test, results, form=None, name=None):
         print("fN:", f_n)
         print("acc:", acc)
         print("AUC:", auc)
+
+def save_model_keras(model, path):
+    save_model(model, path, save_format="h5")
+def load_model_keras(path):
+    loaded = load_model(path)
+    return loaded
+def save_model_sk(model, path):
+    pickle.dump(model, open(path, 'wb'))
+def load_model_sk(path):
+    loaded = pickle.load(open(path, 'rb'))
+    return loaded
+def save_vocab(vocab):
+    with open('./variables/vocab.json','w') as outfile:
+        json.dump(vocab,outfile)
+def load_vocab_with(new_vocab):
+    with open('./variables/vocab.json','r') as infile:
+        old_vocab = json.load(infile)
+        new_vocab.update(old_vocab)
+        return new_vocab

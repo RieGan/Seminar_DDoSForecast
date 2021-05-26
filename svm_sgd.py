@@ -55,7 +55,8 @@ def svm_classify(trains, tests):
     print("predicted: ", predicted)
     print("target   : ", tests['target'])
 
-    return readResult(tests['target'], predicted, name="SVM", form="JSON")
+    readResult(tests['target'], predicted, name="SVM", form="JSON")
+    return model
 
 
 def sgd_classify(trains, tests):
@@ -66,4 +67,5 @@ def sgd_classify(trains, tests):
 
     predicted = model.predict(tests['tfidf'])
 
-    return readResult(tests['target'], predicted, name="SGD", form="JSON")
+    readResult(tests['target'], predicted, name="SGD", form="JSON")
+    return model
