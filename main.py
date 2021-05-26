@@ -54,8 +54,8 @@ def predict(tweet_word):
     # print("LSTM+: ", lstm_improved.predict([input_data_keras[:128]]))
     # print("SVM: ", svm.predict(input_data_sk))
     # print("SGD: ", sgd.predict(input_data_sk))
-    return {"CNN": cnn.predict([input_data_keras[:128]])[0][0], "LSTM": lstm.predict([input_data_keras[:50]])[0][0],
-            "LSTM+": lstm_improved.predict([input_data_keras[:50]])[0][0], "SVM": svm.predict(input_data_sk)[0],
+    return {"CNN": cnn.predict([input_data_keras[:128]])[0][0], "LSTM": lstm.predict([input_data_keras])[0][0],
+            "LSTM+": lstm_improved.predict([input_data_keras])[0][0], "SVM": svm.predict(input_data_sk)[0],
             "SGD": sgd.predict(input_data_sk)[0]}
 
 
@@ -77,11 +77,12 @@ def main():
             plt_colors.append("red")
 
     plt.title("DDOS attack prediction\nKeyword: " + tweet_search)
-    plt.bar(x_pos,plt_values, color = plt_colors)
-    plt.xticks(x_pos,plt_keys)
+    plt.bar(x_pos, plt_values, color=plt_colors)
+    plt.xticks(x_pos, plt_keys)
     plt.ylabel("Probabilty")
     plt.xlabel("Model")
     plt.show()
+
 
 if __name__ == "__main__":
     main()
