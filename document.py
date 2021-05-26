@@ -126,6 +126,13 @@ def formatK(data, V):
         Y.append(d.label)
     return X, Y
 
+def formatK_tweet(data, V):
+    x = []
+    for word in data.keys():
+        if word in V:
+            x.append(V[word])
+    return x
+
 
 def getPositiveSamples_ranges(tweets, events, idList, week_num, date_range=7):
     idSet = set(idList)

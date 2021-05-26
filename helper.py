@@ -106,9 +106,12 @@ def readResult(y_test, results, form=None, name=None):
         print("AUC:", auc)
 
 def save_model_keras(model, path):
-    save_model(model, path, save_format="h5")
+    save_model(model, path, save_format="tf")
 def load_model_keras(path):
     loaded = load_model(path)
+    return loaded
+def load_model_keras_custom(path, custom_obj):
+    loaded = load_model(path, custom_objects=custom_obj)
     return loaded
 def save_model_sk(model, path):
     pickle.dump(model, open(path, 'wb'))
@@ -118,8 +121,21 @@ def load_model_sk(path):
 def save_vocab(vocab):
     with open('./variables/vocab.json','w') as outfile:
         json.dump(vocab,outfile)
-def load_vocab_with(new_vocab):
+def load_vocab():
+    with open('./variables/vocab.json','r') as infile:
+        vocab = json.load(infile)
+        return vocab
+def update_vocab_with(new_vocab):
     with open('./variables/vocab.json','r') as infile:
         old_vocab = json.load(infile)
-        new_vocab.update(old_vocab)
-        return new_vocab
+        last_id = max(old_vocab.values())
+        vocab = {}
+        for key in new_vocab.keys():
+            last_id+=1
+            vocab[key] = last_id
+        vocab.update(old_vocab)
+        return vocab
+def word_transform(dict):
+    words = ' '.join(map(str, list(dict.keys())))
+    tfidf_vectorizer = load_model_sk('./variables/svm_sgd_tfidf_vect.sav')
+    return tfidf_vectorizer.transform([words])

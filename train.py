@@ -45,6 +45,6 @@ lstm_plus_model = lstm_improved(np.array(X_train), np.array(y_train), np.array(X
 #saving the models to file
 save_model_sk(svm_model, './variables/svm_model.sav')
 save_model_sk(sgd_model, './variables/sgd_model.sav')
-save_model_keras(cnn_model, './variables/cnn_model.h5')
-save_model_keras(lstm_model, './variables/lstm_model.h5')
-save_model_keras(lstm_plus_model, './variables/lstm+_model.h5')
+save_model_keras(cnn_model, './variables/cnn_model.tf')
+save_model_keras(lstm_model, './variables/lstm_model.tf')
+save_model_keras(lstm_plus_model, './variables/lstm+_model.tf')

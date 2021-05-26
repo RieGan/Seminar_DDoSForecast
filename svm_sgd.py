@@ -3,7 +3,7 @@ from sklearn.svm import LinearSVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import SGDClassifier
-from helper import readResult
+from helper import readResult, save_model_sk
 import numpy as np
 
 np.random.seed(1337)
@@ -35,6 +35,7 @@ def word_transform(documents_train, documents_test):
     tfidf_vectorizer = TfidfVectorizer()
     train_words_tfidf = tfidf_vectorizer.fit_transform(words_train)
     test_words_tfidf = tfidf_vectorizer.transform(words_test)
+    save_model_sk(tfidf_vectorizer, './variables/svm_sgd_tfidf_vect.sav')
 
     print("train_tfidf_shape:", train_words_tfidf.shape)
     print("test_tfidf_shape", test_words_tfidf.shape)
