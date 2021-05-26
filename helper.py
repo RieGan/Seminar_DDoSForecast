@@ -3,7 +3,6 @@ import json
 from sklearn.metrics import average_precision_score
 from tensorflow.keras.models import load_model, save_model
 import pickle
-import json
 
 
 def readResult(y_test, results, form=None, name=None):
